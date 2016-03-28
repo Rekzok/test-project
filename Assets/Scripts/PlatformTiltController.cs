@@ -28,6 +28,9 @@ public class PlatformTiltController : MonoBehaviour {
 	
 	void Update ()
     {
+        float xDirectionCheck = Random.value;
+        float zDirectionCheck = Random.value;
+
         //rotates the platform a certain amount each frame
         transform.Rotate(Vector3.right, xDirection * rotationSpeed * xRand * Time.deltaTime);
         xAngle += xDirection * rotationSpeed * xRand * Time.deltaTime;
@@ -35,12 +38,12 @@ public class PlatformTiltController : MonoBehaviour {
         zAngle += zDirection * rotationSpeed * zRand * Time.deltaTime;
 
         //checks if platform has reached its maximum angle and reverses its direction if so
-        if (xAngle >= maxAngle || xAngle <= -maxAngle)
+        if (xAngle >= maxAngle || xAngle <= -maxAngle || xDirectionCheck <= reverseChance)
         {
             xDirection = xDirection * -1;
             xRand = Random.value + Random.Range(1, 3);
         }
-        if (zAngle >= maxAngle || zAngle <= -maxAngle)
+        if (zAngle >= maxAngle || zAngle <= -maxAngle || zDirectionCheck <= reverseChance)
         {
             zDirection = zDirection * -1;
             zRand = Random.value + Random.Range(1, 3);
